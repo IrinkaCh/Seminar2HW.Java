@@ -25,11 +25,15 @@ public class Seminar2Task1 {
         System.out.println(sqlText.toString());
     }
 
+    /**
+     * @param path
+     * @return
+     */
     private static String parseJson(String path) {
 
         try (FileReader filer = new FileReader(path);) {
             try (Scanner scan1 = new Scanner(filer)) {
-                StringBuilder build = new StringBuilder();
+                final StringBuilder build = new StringBuilder();
                 String s = "";
                 while (scan1.hasNextLine()) {
                     build.append(scan1.nextLine());
