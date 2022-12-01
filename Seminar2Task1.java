@@ -1,7 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.BreakIterator;
 import java.util.Scanner;
 
 public class Seminar2Task1 {
@@ -29,25 +28,26 @@ public class Seminar2Task1 {
     private static String parseJson(String path) {
 
         try (FileReader filer = new FileReader(path);) {
-            Scanner scan1 = new Scanner(filer);
-            StringBuilder build = new StringBuilder();
-            String s = "";
-            while (scan1.hasNextLine()) {
-                build.append(scan1.nextLine());
+            try (Scanner scan1 = new Scanner(filer)) {
+                StringBuilder build = new StringBuilder();
+                String s = "";
+                while (scan1.hasNextLine()) {
+                    build.append(scan1.nextLine());
+                }
+                s = build.toString();
+                filer.close();
+                s = s.replace(" ", "");
+                s = s.replace("{", "");
+                s = s.replace("}", "");
+                System.out.println(s + "\n");
+                return s;
             }
-            s = build.toString();
-            filer.close();
-            s = s.replace(" ", "");
-            s = s.replace("{", "");
-            s = s.replace("}", "");
-            System.out.println(s + "\n");
-            return s;
         } catch (FileNotFoundException ex1) {
             System.out.println(ex1.getMessage());
         } catch (IOException exception) {
             System.out.println(exception.getMessage());
         }
         return "";
-        
+
     }
 }
